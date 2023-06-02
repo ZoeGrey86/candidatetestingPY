@@ -1,27 +1,25 @@
-# TODO 2: modify your quiz app to ask 5 questions
 
-# TODO 1.2a: Assign question, correct_answer, and candidate_answer
-candidate_name = ""
+candidate_name = [""]
 
-questions = ["Who was the first American woman in space? ", "True or False: 5 kilometer == 5000 meters? ", "(5 + 3)/2 * 10 = ? ", "Given the list [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ", "What is the minimum crew size for the ISS? "]
+questions = ["Who was the first American woman in space? ", "True or False: 5 kilometer == 5000 meters? ",
+             "(5 + 3)/2 * 10 = ? ", "Given the list [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ",
+             "What is the minimum crew size for the ISS? "]
 
-correct_answers = ["Sally Ride","True","40","Trajectory","3"]
+correct_answers = ["Sally Ride", "True", "40", "Trajectory", "3"]
 
-candidate_answers = ["ans0","ans1","ans2","ans3","ans4"]
+candidate_answers = ["ans0", "ans1", "ans2", "ans3", "ans4"]
+
+grade = [0]
+
+candidate_status = [""]
 
 
 def ask_for_name():
-    # TODO 1.1: Ask for candidate's name
-    candidate_name = input("Please enter your name: ")
-    print("\nHello " + candidate_name + "!")
+    name = input("Please enter your name: ")
+    candidate_name[0] = name
+    print("\nHello " + name + "!")
+    return name
 
-    return candidate_name
-
-def ask_question():
-    # TODO 1.2b: Ask candidate the question and assign the response as candidate_answer
-    candidate_answer = input(question)
-
-    return candidate_answer
 
 def ask_questions():
     for num in range(5):
@@ -34,24 +32,32 @@ def ask_questions():
 
 
 def grade_quiz(candidate_answers):
-
-    # TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly
-    grade = 0
+    score = 0
 
     for num in range(5):
         if candidate_answers[num] == correct_answers[num]:
-            grade = grade+20
+            score = score + 20
+    grade[0] = score
 
-    results = "Overall Grade: " + str(grade) + "%"
-    return print(results)
+    return score
+
+
+def evaluate_status(score):
+    candidate_status[0] = "Failed"
+    if score >= 80:
+        candidate_status[0] = "Passed"
+    return candidate_status
 
 
 def run_program():
-
-    # TODO 1.1b: Ask for candidate's name and greet them by their name
     ask_for_name()
 
     ask_questions()
 
     grade_quiz(candidate_answers)
 
+    evaluate_status(grade[0])
+
+    print(candidate_name[0])
+    print("Overall Grade: " + str(grade[0]) + "%")
+    print("candidate_status: " + candidate_status[0])
